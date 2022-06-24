@@ -1,0 +1,2 @@
+def disemvowel(string):
+    return string.replace('a','').replace('i','').replace('o','').replace('u','').replace('e','').replace('A','').replace('I','').replace('O','').replace('U','').replace('E','')
