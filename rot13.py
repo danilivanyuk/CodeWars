@@ -1,25 +1,31 @@
 def rot13(message):
     alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+    alphabet_upper = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+    numList = ['1','2','3','4','5','6','7','8','9','0']
+    punctList = [' ', '!', '?', ',', '.', '+']
     msg_to_list = list(message)
     someList = []
-    # someList.append(alphabet.index('e')+13)
     for i in msg_to_list:
-        letterIndex = alphabet.index(i)
-        if letterIndex+13>25:
-            x = (letterIndex+13)-25
-            # print('x: ', x)
-            newLetterIndex = alphabet[x]
-            someList.append(alphabet.index(newLetterIndex))
+        if i in numList:
+            someList.append(i)
+        elif i in punctList:
+            someList.append(i)
         else:
-            someList.append(letterIndex+13)
-        
+            letterIndex = alphabet_upper.index(i) if i.isupper() else alphabet.index(i)
+            
+            if letterIndex+13>25:
+                x = (letterIndex+12)-25
+                newLetter = alphabet_upper[x] if i.isupper() else alphabet[x]
+
+                someList.append(newLetter)
+            else:
+                newLetter = alphabet_upper[letterIndex+13] if i.isupper() else alphabet[letterIndex+13]
+                someList.append(newLetter)
     res = ''
-    for i in someList:
-        res += alphabet[i]
-    # res.join(alphabet[x] for x in someList)
-    # x = alphabet.index(msg_to_list[0])
+    res = ''.join(someList)
+
     return res
 
 
 
-print(rot13('test'))
+print(rot13('1TEst some'))
